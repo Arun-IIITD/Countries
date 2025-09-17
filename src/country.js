@@ -54,4 +54,4 @@ export const Countries = () => {
   );
 };
 
-export default Card;
+export default Countries;
