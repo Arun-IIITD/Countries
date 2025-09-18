@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Card = ({ name, flag, abbr }) => {
+const Card = ({ name, flag }) => {
   return (
     <div
       style={{
@@ -16,14 +16,14 @@ const Card = ({ name, flag, abbr }) => {
         textAlign: "center"
       }}
     >
-      <img src={flag} alt={`flag of ${abbr}`} width="100" height="60" />
+      <img src={flag} alt={`flag of ${name}`} width="100" height="60" />
       <h2>{name}</h2>
     </div>
   );
 };
 
-//const API = "https://countries-search-data-prod-812920491762.asia-south1.run.app/countries";
-const API = "https://xcountries-backend.labs.crio.do/all";
+const API = "https://countries-search-data-prod-812920491762.asia-south1.run.app/countries";
+//const API = "https://xcountries-backend.labs.crio.do/all";
 
 export const Countries = () => {
   const [countryData, setCountryData] = useState([]);
@@ -38,7 +38,7 @@ export const Countries = () => {
 
   const filteredcountries = countryData.filter((country) => 
     //country.name.toLowerCase().includes(search.toLowerCase())
-   country.name?.toLowerCase().includes(search.toLowerCase())
+   country.common?.toLowerCase().includes(search.toLowerCase())
   )
 
 
@@ -73,9 +73,9 @@ export const Countries = () => {
       {filteredcountries.map((country, index) => (
         <Card
           key={index}
-          name={country.name}
-          flag={country.flag}
-          abbr={country.abbr}
+          name={country.common}
+          flag={country.png}
+          // abbr={country.abbr}
         />
       ))}
 
