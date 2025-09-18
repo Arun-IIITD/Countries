@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const Card = ({ name, flag }) => {
   return (
-    <div
+    <div className = "countryCard"
       style={{
         display: "flex",
         flexDirection: "column",
