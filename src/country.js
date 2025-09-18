@@ -22,10 +22,12 @@ const Card = ({ name, flag, abbr }) => {
   );
 };
 
-const API = " https://xcountries-backend.labs.crio.do/all";
+//const API = "https://countries-search-data-prod-812920491762.asia-south1.run.app/countries";
+const API = "https://xcountries-backend.labs.crio.do/all";
 
 export const Countries = () => {
   const [countryData, setCountryData] = useState([]);
+  const [search, setsearch] = useState("");
 
   useEffect(() => {
     fetch(API)
@@ -34,7 +36,33 @@ export const Countries = () => {
       .catch((error) => console.error("Error fetching data: " + error));
   }, []);
 
+  const filteredcountries = countryData.filter((country) => 
+    //country.name.toLowerCase().includes(search.toLowerCase())
+   country.name?.toLowerCase().includes(search.toLowerCase())
+  )
+
+
+
+  
+
   return (
+    <div>
+
+      <div> 
+        <input
+        style = {{marginLeft: "300px", marginBottom: "20px"}}
+        type="text"
+        placeholder="Search for countries..."
+        name="search"
+        value={search}
+        onChange={(e) => setsearch(e.target.value)}
+
+
+
+        />
+      </div>
+
+
     <div
       style={{
         display: "flex",
@@ -42,7 +70,7 @@ export const Countries = () => {
         gap: "10px",
       }}
     >
-      {countryData.map((country, index) => (
+      {filteredcountries.map((country, index) => (
         <Card
           key={index}
           name={country.name}
@@ -50,6 +78,9 @@ export const Countries = () => {
           abbr={country.abbr}
         />
       ))}
+
+    </div>
+
     </div>
   );
 };
